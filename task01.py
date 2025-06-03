@@ -20,6 +20,25 @@ class HashTable:
                     return True
             self.table[key_hash].append(key_value)
             return True
+        
+    def delete(self, key):
+        key_hash = self.hash_function(key)
+        # print(key, key_hash, self.table[key_hash])
+        if self.table[key_hash] == [] :
+            print("key",key, "not found")
+            return False
+        else:
+            # print("self.table[key_hash][0][0] = ",self.table[key_hash][0][0])
+            if self.table[key_hash][0][0] != key:
+                print("key",key, "not found")
+                return False
+            # print(self.table)
+            print ("record with key", key, "was deleted")
+            self.table[key_hash] = []
+            # print(self.table)
+            return True
+
+        
 
     def get(self, key):
         key_hash = self.hash_function(key)
@@ -38,3 +57,7 @@ H.insert("banana", 30)
 print(H.get("apple"))   # Виведе: 10
 print(H.get("orange"))  # Виведе: 20
 print(H.get("banana"))  # Виведе: 30
+# try to delete wrong key
+print(H.delete("bananas"))  # Виведе: False
+# delete record
+print(H.delete("orange"))   # Виведе True
